@@ -43,7 +43,20 @@ gem "slim"
 gem "slim-rails"
 gem "redcarpet"
 gem "normalize-rails"
+
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'launchy', :require => false
+end
+
 group :development do
+  gem "rspec-rails"
   gem "better_errors"
   gem "binding_of_caller"
   gem "html2slim"
