@@ -1,0 +1,6 @@
+= form_for @article do |f|
+  | Title: #{f.text_field :title}
+  br
+  | Url: #{f.text_field :url}
+  br
+  = f.submit

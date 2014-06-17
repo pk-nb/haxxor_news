@@ -45,6 +45,7 @@ gem "redcarpet"
 gem "normalize-rails"
 
 group :test, :development do
+  gem 'pry'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
@@ -56,7 +57,6 @@ group :test do
 end
 
 group :development do
-  gem "rspec-rails"
   gem "better_errors"
   gem "binding_of_caller"
   gem "html2slim"
