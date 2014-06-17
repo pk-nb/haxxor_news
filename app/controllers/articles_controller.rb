@@ -13,7 +13,8 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to :articles
     else
-      render :new, notice: 'Invalid article'
+      flash.now[:notice] = 'Article was not posted—please correct fields below.'
+      render :new
     end
   end
 
@@ -22,7 +23,8 @@ class ArticlesController < ApplicationController
   end
 
   private
-    def article_params
-      params.require(:article).permit(:title, :url)
-    end
+  def article_params
+    params.require(:article).permit(:title, :url)
+  end
+
 end

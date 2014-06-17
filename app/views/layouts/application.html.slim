@@ -10,4 +10,7 @@ html
     header
       h1 Haxxor News
       = link_to 'New Article', new_article_path
+    .errors
+      - flash.each do |key, value|
+        = content_tag(:span, value, class: "alert alert-#{key}")
     = yield
