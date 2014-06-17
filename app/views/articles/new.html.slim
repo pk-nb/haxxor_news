@@ -1,6 +1,4 @@
-= form_for @article do |f|
-  | Title: #{f.text_field :title}
-  br
-  | Url: #{f.text_field :url}
-  br
-  = f.submit
+= simple_form_for @article do |f|
+  = f.input :title, label: 'Article Title'
+  = f.input :url, label: 'URL'
+  = f.button :submit

@@ -11,17 +11,28 @@
  *= require_self
  */
 
- @import 'reset';
+@import 'reset';
+
+* {
+   box-sizing: border-box;
+}
 
 body {
    font-family: sans-serif;
    padding: 2em;
 }
 
-h1 {
+header {
    font-family: monospace;
-   font-size: 2em;
    margin-bottom: 1em;
+   border-left: 0.5em solid #e65c16;
+   padding: 0.5em;
+   padding-left: 1em;
+}
+
+h1 {
+   font-size: 2em;
+   margin-bottom: 0.25em;
 }
 
 .article {

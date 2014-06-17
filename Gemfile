@@ -43,6 +43,7 @@ gem "slim"
 gem "slim-rails"
 gem "redcarpet"
 gem "normalize-rails"
+gem 'simple_form'
 
 group :test, :development do
   gem 'pry'
