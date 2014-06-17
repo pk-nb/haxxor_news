@@ -1,7 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
  *
@@ -13,3 +10,39 @@
  *= require_tree .
  *= require_self
  */
+
+ @import 'reset';
+
+body {
+   font-family: sans-serif;
+   padding: 2em;
+}
+
+h1 {
+   font-family: monospace;
+   font-size: 2em;
+   margin-bottom: 1em;
+}
+
+.article {
+   overflow: none;
+   padding: 0.5em 0;
+   // display: table;
+}
+
+.article .num {
+   font-family: monospace;
+   float: left;
+   vertical-align: middle;
+   height: 100%;
+   padding-right: 1em;
+   font-size: 2em;
+}
+
+.article:not(:last-of-type) {
+   border-bottom: 1px dotted #aaa;
+}
+
+h2.title {
+   font-size: 1.25em;
+}
