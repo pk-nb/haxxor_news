@@ -13,47 +13,69 @@
 
 @import 'reset';
 
+$orange-main: #e65c16;
+
 * {
-   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-   font-family: sans-serif;
-   padding: 2em;
+  font-family: sans-serif;
+  padding: 2em;
 }
 
 header {
-   font-family: monospace;
-   margin-bottom: 1em;
-   border-left: 0.5em solid #e65c16;
-   padding: 0.5em;
-   padding-left: 1em;
+  font-family: monospace;
+  margin-bottom: 1em;
+  border-left: 0.5em solid $orange-main;
+  padding: 0.5em;
+  padding-left: 1em;
 }
 
 h1 {
-   font-size: 2em;
-   margin-bottom: 0.25em;
+  font-size: 2em;
+  margin-bottom: 0.25em;
 }
 
 .article {
-   overflow: none;
-   padding: 0.5em 0;
-   // display: table;
+  padding: 0.5em 0;
 }
 
 .article .num {
-   font-family: monospace;
-   float: left;
-   vertical-align: middle;
-   height: 100%;
-   padding-right: 1em;
-   font-size: 2em;
+  font-family: monospace;
+  padding-right: 1em;
+  font-size: 2em;
 }
 
 .article:not(:last-of-type) {
-   border-bottom: 1px dotted #aaa;
+  border-bottom: 1px dotted #aaa;
+}
+
+.article a span {
+  font-size: 0.75em;
+}
+
+.article-detail {
+  border-left: 1px dotted #aaa;
+  padding: 1em;
 }
 
 h2.title {
-   font-size: 1.25em;
+  display: inline;
+  font-size: 1.25em;
+}
+
+a {
+  text-decoration: none;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: $orange-main;
+}
+
+a:hover {
+  background-color: rgba(168, 168, 168, 0.49);
 }

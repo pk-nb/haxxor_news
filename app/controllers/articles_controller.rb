@@ -12,9 +12,8 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     if @article.save
       redirect_to :articles
-    # else
-      # Simple form is currently validating, this render does nothing
-      # render :new, notice: "Invalid article"
+    else
+      render :new, notice: 'Invalid article'
     end
   end
 

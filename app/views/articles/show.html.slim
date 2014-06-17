@@ -1,2 +1,4 @@
-h1= @article.title
-p= @article.url
+= link_to "< Back", articles_path
+.article-detail
+  h1= @article.title
+  = link_to @article.url, @article.url

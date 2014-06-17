@@ -1,6 +1,6 @@
 - @articles.each.with_index do |article, index|
   .article
-    .num= index
-    h2.title= article.title
-    a href="#{article.url}"
-      = article.url
+    span.num= link_to index, article
+    h2.title= link_to article.url do
+      => article.title
+      span= "(#{article.url})"
