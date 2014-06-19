@@ -44,6 +44,7 @@ gem "slim-rails"
 gem "redcarpet"
 gem "normalize-rails"
 gem 'simple_form'
+gem 'bcrypt', '~> 3.1.7'
 
 group :test, :development do
   gem 'pry'
