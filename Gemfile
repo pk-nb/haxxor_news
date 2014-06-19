@@ -47,7 +47,7 @@ gem 'simple_form'
 
 group :test, :development do
   gem 'pry'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.14.2'
   gem 'factory_girl_rails'
 end
 
@@ -69,5 +69,5 @@ group :development do
 end
 
 group :production do
-  gem 'rails_12factor'  
+  gem 'rails_12factor'
 end
