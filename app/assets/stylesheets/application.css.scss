@@ -80,14 +80,21 @@ a:hover {
   background-color: rgba(168, 168, 168, 0.49);
 }
 
-#errors {
+#notice, #error {
   margin: 0 auto;
   text-align: center;
 }
 
-#errors .alert {
-  background-color: #ffeeba;
+#error .alert, #notice .alert {
   border-radius: 1em;
   text-align: center;
   padding: 0.25em 0.5em;
+}
+
+#notice .alert {
+  background-color: #ffeeba;
+}
+
+#error .alert {
+  background-color: #ffbdbd;
 }

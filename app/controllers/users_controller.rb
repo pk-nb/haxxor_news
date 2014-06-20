@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to :articles
     else
-      flash.now[:notice] = 'Was unsuccessful registering—please correct fields below'
+      flash.now[:error] = 'Was unsuccessful registering—please correct fields below'
       render :new
     end
   end
