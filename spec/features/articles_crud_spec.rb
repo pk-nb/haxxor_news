@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe 'Articles CRUD' do
 
-  describe 'a user on the front page of articlesg' do
+  describe 'a user on the front page of articles' do
     it 'displays nothing with no articles in database' do
       visit '/'
       expect(page).to_not have_css('.article')
@@ -25,10 +25,11 @@ RSpec.describe 'Articles CRUD' do
       click_on 'New Article'
     end
 
+    let (:error_message) { 'Article was not posted' }
+
     it 'displays an error when not filled' do
       click_on 'Create Article'
-
-      expect(page).to have_css('#flash-error')
+      within('#flash') { expect(page).to have_content(error_message) }
     end
 
     it 'succeeds when submitting with valid input' do

@@ -12,7 +12,9 @@ html
       = link_to 'New Article', new_article_path
       br
       = link_to 'Sign Up', new_user_path
-    - flash.each do |key, value|
-      = content_tag(:div, id: "flash-#{key}") do
-        = content_tag(:span, value, class: "alert alert-#{key}")
+    #flash
+      - flash.each do |key, value|
+        = content_tag(:div, id: "flash-#{key}") do
+          = content_tag(:span, value, class: "alert alert-#{key}")
+    p Was unsuccessful registering
     = yield
