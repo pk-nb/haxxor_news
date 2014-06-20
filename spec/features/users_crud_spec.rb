@@ -9,7 +9,7 @@ RSpec.describe 'User CRUD' do
 
     it 'shows error with no input' do
       click_on 'Create User'
-      expect(page).to have_css('#error')
+      expect(page).to have_css('#flash-error')
     end
 
     it 'shows error with invalid input' do
@@ -18,7 +18,7 @@ RSpec.describe 'User CRUD' do
       fill_in 'user_password', with: 'secreteating'
       fill_in 'user_password_confirmation', with: 'secreteating'
       click_on 'Create User'
-      expect(page).to have_css('#error')
+      expect(page).to have_css('#flash-error')
     end
 
     it 'successfully signing up with valid input' do
@@ -31,7 +31,7 @@ RSpec.describe 'User CRUD' do
         click_on 'Create User'
       }.to change(User, :count).by(1)
 
-      expect(page).to_not have_css('#error')
+      expect(page).to_not have_css('#flash-error')
     end
   end
 end
