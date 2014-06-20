@@ -5,7 +5,7 @@ RSpec.describe 'Articles CRUD' do
   describe '#index' do
     it 'displays nothing with no articles in database' do
       visit '/'
-      page.should_not have_css('.article')
+      expect(page).to_not have_css('.article')
     end
 
     it 'displays all articles in database' do
@@ -14,8 +14,8 @@ RSpec.describe 'Articles CRUD' do
 
       visit '/'
 
-      page.should have_content 'Article 1'
-      page.should have_content 'Article 2'
+      expect(page).to have_content 'Article 1'
+      expect(page).to have_content 'Article 2'
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe 'Articles CRUD' do
     it 'displays an error when not filled' do
       click_on 'Create Article'
 
-      page.should have_content 'Article was not posted'
+      expect(page).to have_css('#errors')
     end
 
     it 'succeeds when submitting with valid input' do
@@ -39,9 +39,9 @@ RSpec.describe 'Articles CRUD' do
         click_on 'Create Article'
       }.to change {
         Article.count
-      }.from(0).to(1)
+      }.by(1)
 
-      page.should have_content 'Coolest blog ever'
+      expect(page).to have_content 'Coolest blog ever'
     end
   end
 
