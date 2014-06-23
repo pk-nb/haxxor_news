@@ -80,14 +80,21 @@ a:hover {
   background-color: rgba(168, 168, 168, 0.49);
 }
 
-.errors {
+#flash-notice, #flash-error {
   margin: 0 auto;
   text-align: center;
 }
 
-.errors .alert {
-  background-color: #ffeeba;
+#flash-error .alert, #flash-notice .alert {
   border-radius: 1em;
   text-align: center;
   padding: 0.25em 0.5em;
+}
+
+#flash-notice .alert {
+  background-color: #ffeeba;
+}
+
+#flash-error .alert {
+  background-color: #ffbdbd;
 }

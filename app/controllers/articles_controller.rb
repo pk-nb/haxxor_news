@@ -13,7 +13,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to :articles
     else
-      flash.now[:notice] = 'Article was not posted—please correct fields below.'
+      flash.now[:error] = 'Article was not posted—please correct fields below.'
       render :new
     end
   end
