@@ -84,4 +84,20 @@ RSpec.describe 'Login page' do
     end
   end
 
+  describe 'a new user' do
+    before do
+      visit '/'
+      click_on 'Sign Up'
+      fill_in 'Username', with: 'user'
+      fill_in 'Email', with: 'user@test.com'
+      fill_in 'user_password', with: 'testtest'
+      fill_in 'user_password_confirmation', with: 'testtest'
+      click_on 'Create User'
+    end
+
+    it 'should be logged in when new account is created' do
+      expect(page).to have_content('user')
+      expect(page).to have_link('Logout')
+    end
+  end
 end

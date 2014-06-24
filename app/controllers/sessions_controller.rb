@@ -24,9 +24,4 @@ class SessionsController <  ApplicationController
   def session_params
     params.require(:session).permit(:login, :password)
   end
-
-  def current_user=(user)
-    @current_user= user
-    session[:user_id] = @current_user.id
-  end
 end

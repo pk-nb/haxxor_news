@@ -39,10 +39,10 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 
-gem "slim"
-gem "slim-rails"
-gem "redcarpet"
-gem "normalize-rails"
+gem 'slim'
+gem 'slim-rails'
+gem 'redcarpet'
+gem 'normalize-rails'
 gem 'simple_form'
 gem 'bcrypt', '~> 3.1.7'
 
@@ -59,14 +59,15 @@ group :test do
 end
 
 group :development do
-  gem "quiet_assets"
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem "html2slim"
-  gem "rb-fsevent", group: :osx
-  gem "guard"
-  gem "guard-livereload"
-  gem "guard-rails"
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'awesome_print'
+  gem 'binding_of_caller'
+  gem 'html2slim'
+  gem 'rb-fsevent', group: :osx
+  gem 'guard'
+  gem 'guard-livereload'
+  gem 'guard-rails'
 end
 
 group :production do
