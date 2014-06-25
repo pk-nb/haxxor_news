@@ -46,4 +46,44 @@ RSpec.describe 'Articles CRUD' do
     end
   end
 
+  describe 'articles are paginated' do
+    context 'less than or equal to 20 articles' do
+      before do
+        FactoryGirl.create_list(:article, 20)
+        visit '/'
+      end
+
+      it 'should not be paginated' do
+        within('.page-numbers') { expect(page).to_not have_link('1') }
+        within('.page-numbers') { expect(page).to_not have_link('2') }
+      end
+    end
+
+    context 'more than 20 articles' do
+      before do
+        FactoryGirl.create_list(:article, 21)
+        visit '/'
+      end
+
+      it 'should be paginated' do
+        within('.page-numbers') { expect(page).to have_link('1') }
+        within('.page-numbers') { expect(page).to have_link('2') }
+      end
+    end
+
+    context 'article numbers' do
+      before do
+        FactoryGirl.create_list(:article, 41)
+        visit '/'
+      end
+
+      it 'should have the correct offset' do
+        within('.page-numbers') { click_on '2' }
+        expect(page).to have_link('21')
+        within('.page-numbers') { click_on '3' }
+        expect(page).to have_link('41')
+      end
+    end
+
+  end
 end

@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  helper_method :page, :total_pages
+  helper_method :page, :total_pages, :offset
 
   def index
     @articles = Article.offset(offset).limit(Article::PER_PAGE).order(created_at: :desc)
@@ -29,15 +29,15 @@ class ArticlesController < ApplicationController
   end
 
   def page
-    @page ||= [0, params[:page_number].to_i].max
+    @page ||= [1, params[:page_number].to_i].max
   end
 
   def total_pages
-    @total_pages = Article.count / Article::PER_PAGE
+    @total_pages = ((Article.count - 1) / Article::PER_PAGE) + 1
   end
 
   def offset
-    page * Article::PER_PAGE
+    (page - 1) * Article::PER_PAGE
   end
 
 end
