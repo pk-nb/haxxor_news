@@ -15,4 +15,7 @@ RSpec.describe User do
   it { should allow_value('h.+-1@test.com', 'money2$$.hi@many.sub.domains.com').for(:email) }
   it { should_not allow_value('!!@ha.com', 'one@two@three.com', 'blargh@email').for(:email) }
 
+  it { should allow_value('goodname', '$this_is_fine$', '*$()!!whynot!!()$*').for(:username) }
+  it { should_not allow_value('name@', '#nameguy').for(:username) }
+
 end
