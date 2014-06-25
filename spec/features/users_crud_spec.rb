@@ -15,19 +15,13 @@ RSpec.describe 'User CRUD' do
     end
 
     it 'shows error with invalid input' do
-      fill_in 'Username', with: 'ma'
-      fill_in 'Email', with: 'creepy@marshmallow'
-      fill_in 'user_password', with: 'secreteating'
-      fill_in 'user_password_confirmation', with: 'secreteating'
+      fill_new_user_form('m', 'bad@email', 'password', 'password')
       click_on 'Create User'
       within('#flash') { expect(page).to have_content(error_message) }
     end
 
     it 'successfully signing up with valid input' do
-      fill_in 'Username', with: 'marshie'
-      fill_in 'Email', with: 'creepy@marshmallow.com'
-      fill_in 'user_password', with: 'secreteating'
-      fill_in 'user_password_confirmation', with: 'secreteating'
+      fill_new_user_form('marshie', 'creepy@marshmallow.com', 'secreteating', 'secreteating')
 
       expect {
         click_on 'Create User'

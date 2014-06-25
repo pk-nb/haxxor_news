@@ -4,3 +4,6 @@
     h2.title= link_to article.url do
       => article.title
       span= "(#{article.url})"
+ul.page-numbers
+  - total_pages.times do |n|
+    li= link_to n, articles_path(page_number: n)
