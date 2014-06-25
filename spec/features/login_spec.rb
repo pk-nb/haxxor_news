@@ -23,7 +23,7 @@ RSpec.describe 'Login page' do
     end
 
     it 'sucessfully logs in with valid username / password combination' do
-      FactoryGirl.create(:user, username: 'user', password: 'password', password_confirmation: 'password')
+      create(:user, username: 'user', password: 'password', password_confirmation: 'password')
       within('form') do
         fill_in 'Login', with: 'user'
         fill_in 'session_password', with: 'password'
@@ -34,7 +34,7 @@ RSpec.describe 'Login page' do
     end
 
     it 'successfully logs in with valid email / password combination' do
-      FactoryGirl.create(:user, username: 'user', email: 'valid@email.com', password: 'password', password_confirmation: 'password')
+      create(:user, username: 'user', email: 'valid@email.com', password: 'password', password_confirmation: 'password')
       within('form') do
         fill_in 'session_login', with: 'valid@email.com'
         fill_in 'session_password', with: 'password'
@@ -49,7 +49,7 @@ RSpec.describe 'Login page' do
   def valid_login
     visit '/'
     click_on 'Login'
-    FactoryGirl.create(:user, username: 'user', password: 'password', password_confirmation: 'password')
+    create(:user, username: 'user', password: 'password', password_confirmation: 'password')
     within('form') do
       fill_in 'session_login', with: 'user'
       fill_in 'session_password', with: 'password'
