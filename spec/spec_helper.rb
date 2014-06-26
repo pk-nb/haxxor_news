@@ -4,6 +4,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
 RSpec.configure do |config|
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
@@ -12,4 +14,5 @@ RSpec.configure do |config|
   config.order = :random
   config.use_transactional_fixtures = true
   config.include FactoryGirl::Syntax::Methods
+  config.include UserCreateHelper, type: :feature
 end

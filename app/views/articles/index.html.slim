@@ -1,6 +1,10 @@
-- @articles.each.with_index do |article, index|
+- @articles.each.with_index(offset + 1) do |article, index|
   .article
     span.num= link_to index, article
     h2.title= link_to article.url do
       => article.title
       span= "(#{article.url})"
+ul.page-numbers
+  - if total_pages > 1
+    - 1.upto(total_pages) do |n|
+      li= link_to (n), articles_path(page_number: (n) )
