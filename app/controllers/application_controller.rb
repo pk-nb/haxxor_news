@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :logged_in?, :current_user
-  before_action :store_current_url
+  before_action :store_redirect_url
 
 
   private
@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
     !current_user.nil?
   end
 
-  def store_current_url
-    session[:current_url] = request.original_url
+  def store_redirect_url
+    session[:redirect_url] = request.original_url
   end
 
-  def current_url
-    session[:current_url]
+  def redirect_url
+    session[:redirect_url]
   end
 end

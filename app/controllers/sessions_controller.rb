@@ -1,6 +1,5 @@
 class SessionsController <  ApplicationController
-  skip_before_action :store_current_url
-
+  skip_before_action :store_redirect_url
   def new
     @session = Session.new
   end
@@ -10,7 +9,7 @@ class SessionsController <  ApplicationController
 
     if @session.valid?
       self.current_user = @session.user
-      redirect_to current_url ? current_url : :articles
+      redirect_to redirect_url ? redirect_url : :articles
     else
       flash.now[:error] = 'The login and password combination is not valid'
       render :new
