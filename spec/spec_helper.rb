@@ -15,4 +15,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.include FactoryGirl::Syntax::Methods
   config.include UserCreateHelper, type: :feature
+  config.include FillLoginHelper, type: :feature
 end

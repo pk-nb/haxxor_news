@@ -6,11 +6,17 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    if logged_in?
+      @article = Article.new
+    else
+      flash[:notice] = 'You must be logged in to post'
+      redirect_to login_path
+    end
   end
 
   def create
     @article = Article.new(article_params)
+    @article.user_id = session[:user_id] if logged_in?
     if @article.save
       redirect_to :articles
     else
