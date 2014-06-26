@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
   end
 
   def total_pages
-    @total_pages = ((Article.count - 1) / Article::PER_PAGE) + 1
+    @total_pages = (Float(Article.count) / Float(Article::PER_PAGE)).ceil
   end
 
   def offset

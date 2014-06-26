@@ -53,6 +53,8 @@ RSpec.describe 'Login page' do
         end
 
         it 'can sucessfully logout' do
+          expect(page).to have_content('user')
+          expect(page).to_not have_content('Login')
           click_on 'Logout'
           expect(page).to_not have_content('user')
           expect(page).to have_content('Login')

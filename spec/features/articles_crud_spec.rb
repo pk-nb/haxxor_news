@@ -54,8 +54,10 @@ RSpec.describe 'Articles CRUD' do
       end
 
       it 'should not be paginated' do
-        within('.page-numbers') { expect(page).to_not have_link('1') }
-        within('.page-numbers') { expect(page).to_not have_link('2') }
+        within('.page-numbers') do
+          expect(page).to_not have_link('1')
+          expect(page).to_not have_link('2')
+        end
       end
     end
 
@@ -66,8 +68,10 @@ RSpec.describe 'Articles CRUD' do
       end
 
       it 'should be paginated' do
-        within('.page-numbers') { expect(page).to have_link('1') }
-        within('.page-numbers') { expect(page).to have_link('2') }
+        within('.page-numbers') do
+          expect(page).to have_link('1')
+          expect(page).to have_link('2')
+        end
       end
     end
 
