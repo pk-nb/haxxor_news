@@ -40,9 +40,13 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     ## Inputs
-    b.use :label_input
-    b.use :hint,  wrap_with: { tag: :span, class: :hint }
-    b.use :error, wrap_with: { tag: :span, class: :error }
+    # b.use :label_input
+    b.wrapper tag: :div, class: 'label-and-hints' do |component|
+      component.use :label
+      component.use :hint,  wrap_with: { tag: :span, class: :hint }
+      component.use :error, wrap_with: { tag: :span, class: :error }
+    end
+    b.use :input
   end
 
   # The default wrapper to be used by the FormBuilder.

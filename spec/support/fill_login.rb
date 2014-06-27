@@ -9,7 +9,7 @@ module FillLoginHelper
 
   def log_in(login, password)
     visit '/'
-    click_on 'Login'
+    click_on 'login'
     fill_log_in_form(login, password)
   end
 

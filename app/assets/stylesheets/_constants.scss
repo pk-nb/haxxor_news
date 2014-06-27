@@ -1,0 +1,18 @@
+$white-main: #fefefe;
+$orange-main: #F7931E;
+$gray-main: #CCCCCC;
+$black-main: #333333;
+$hover-color: rgba(168, 168, 168, 0.49);
+$border-color: #aaa;
+
+$alert-color: #ffeeba;
+$error-color: #ffbdbd;
+
+$break-small: 320px;
+$break-mid: 720px;
+
+
+@mixin debug {
+  background-color: rgba(171, 171, 171, 0.69);
+  border: 1px solid #911;
+}
