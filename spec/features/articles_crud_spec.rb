@@ -9,8 +9,8 @@ RSpec.describe 'Articles CRUD' do
     end
 
     it 'displays all articles in database' do
-      FactoryGirl.create(:article, title: 'Article 1')
-      FactoryGirl.create(:article, title: 'Article 2')
+      create(:article, title: 'Article 1')
+      create(:article, title: 'Article 2')
 
       visit '/'
 
@@ -19,9 +19,29 @@ RSpec.describe 'Articles CRUD' do
     end
   end
 
-  describe 'a user creating a new article' do
+  describe 'a visitor who is not logged in attempting to create a new article' do
     before do
       visit '/'
+      click_on 'New Article'
+    end
+
+    let (:login_notice) { 'You must be logged in to post' }
+
+    it 'shows notice and redirects to login page' do
+       expect(page).to have_content(login_notice)
+    end
+
+    it 'redirects back to new article after successfully logging in' do
+      user = create(:user)
+      fill_log_in_form(user.username, user.password)
+      expect(page).to have_field('Title')
+      expect(page).to have_field('URL')
+    end
+  end
+
+  describe 'a logged in user creating a new article' do
+    before do
+      valid_log_in
       click_on 'New Article'
     end
 
@@ -29,7 +49,7 @@ RSpec.describe 'Articles CRUD' do
 
     it 'displays an error when not filled' do
       click_on 'Create Article'
-      within('#flash') { expect(page).to have_content(error_message) }
+      expect(page).to have_content(error_message)
     end
 
     it 'succeeds when submitting with valid input' do
@@ -49,7 +69,7 @@ RSpec.describe 'Articles CRUD' do
   describe 'articles are paginated' do
     context 'less than or equal to 20 articles' do
       before do
-        FactoryGirl.create_list(:article, 20)
+        create_list(:article, 20)
         visit '/'
       end
 
@@ -63,7 +83,7 @@ RSpec.describe 'Articles CRUD' do
 
     context 'more than 20 articles' do
       before do
-        FactoryGirl.create_list(:article, 21)
+        create_list(:article, 21)
         visit '/'
       end
 
@@ -77,7 +97,7 @@ RSpec.describe 'Articles CRUD' do
 
     context 'article numbers' do
       before do
-        FactoryGirl.create_list(:article, 41)
+        create_list(:article, 41)
         visit '/'
       end
 

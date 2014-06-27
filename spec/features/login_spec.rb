@@ -13,20 +13,12 @@ RSpec.describe 'Login page' do
 
       it 'should show error with no input' do
         within('form.new_session') { click_on 'Login' }
-        within('#flash') { expect(page).to have_content(error_message) }
-      end
-
-      def fill_log_in_form(login, password)
-        within('form.new_session') do
-          fill_in 'Login', with: login
-          fill_in 'Password', with: password
-          click_on 'Login'
-        end
+        expect(page).to have_content(error_message)
       end
 
       it 'should show error with invalid input' do
         fill_log_in_form('bad', 'params')
-        within('#flash') { expect(page).to have_content(error_message) }
+        expect(page).to have_content(error_message)
       end
 
       context 'logging in to a existing account' do
@@ -34,13 +26,13 @@ RSpec.describe 'Login page' do
 
         it 'successfully with username/password combination' do
           fill_log_in_form(user.username, user.password)
-          within('#flash') { expect(page).to_not have_content(error_message) }
+          expect(page).to_not have_content(error_message)
           expect(page).to have_content(user.username)
         end
 
         it 'successfully with email/password combination' do
           fill_log_in_form(user.email, user.password)
-          within('#flash') { expect(page).to_not have_content(error_message) }
+          expect(page).to_not have_content(error_message)
           expect(page).to have_content(user.username)
         end
       end
@@ -52,7 +44,7 @@ RSpec.describe 'Login page' do
           fill_log_in_form(user.username, user.password)
         end
 
-        it 'can sucessfully logout' do
+        it 'can successfully logout' do
           expect(page).to have_content('user')
           expect(page).to_not have_content('Login')
           click_on 'Logout'
@@ -64,7 +56,6 @@ RSpec.describe 'Login page' do
   end
 
   describe 'a new user' do
-
     before do
       visit '/'
       click_on 'Sign Up'

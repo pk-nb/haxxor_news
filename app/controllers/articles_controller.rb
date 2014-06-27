@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   helper_method :page, :total_pages, :offset
+  before_action :require_logged_in, only: [:new, :create]
 
   def index
     @articles = Article.offset(offset).limit(Article::PER_PAGE).order(created_at: :desc)
@@ -11,6 +12,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user_id = current_user.id
     if @article.save
       redirect_to :articles
     else
@@ -40,4 +42,10 @@ class ArticlesController < ApplicationController
     (page - 1) * Article::PER_PAGE
   end
 
+  def require_logged_in
+    if !logged_in?
+      flash[:notice] = 'You must be logged in to post'
+      redirect_to login_path
+    end
+  end
 end
