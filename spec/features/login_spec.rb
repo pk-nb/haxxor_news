@@ -13,12 +13,12 @@ RSpec.describe 'Login page' do
 
       it 'should show error with no input' do
         within('form.new_session') { click_on 'Login' }
-        within('#flash') { expect(page).to have_content(error_message) }
+        expect(page).to have_content(error_message)
       end
 
       it 'should show error with invalid input' do
         fill_log_in_form('bad', 'params')
-        within('#flash') { expect(page).to have_content(error_message) }
+        expect(page).to have_content(error_message)
       end
 
       context 'logging in to a existing account' do
@@ -26,13 +26,13 @@ RSpec.describe 'Login page' do
 
         it 'successfully with username/password combination' do
           fill_log_in_form(user.username, user.password)
-          within('#flash') { expect(page).to_not have_content(error_message) }
+          expect(page).to_not have_content(error_message)
           expect(page).to have_content(user.username)
         end
 
         it 'successfully with email/password combination' do
           fill_log_in_form(user.email, user.password)
-          within('#flash') { expect(page).to_not have_content(error_message) }
+          expect(page).to_not have_content(error_message)
           expect(page).to have_content(user.username)
         end
       end

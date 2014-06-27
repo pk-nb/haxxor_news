@@ -28,14 +28,14 @@ RSpec.describe 'Articles CRUD' do
     let (:login_notice) { 'You must be logged in to post' }
 
     it 'shows notice and redirects to login page' do
-      within('#flash') { expect(page).to have_content(login_notice) }
+       expect(page).to have_content(login_notice)
     end
 
     it 'redirects back to new article after successfully logging in' do
       user = create(:user)
-      within('#flash') { expect(page).to have_content(login_notice) }
       fill_log_in_form(user.username, user.password)
-      expect(page).to have_css('form.new_article')
+      expect(page).to have_field('Title')
+      expect(page).to have_field('URL')
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.describe 'Articles CRUD' do
 
     it 'displays an error when not filled' do
       click_on 'Create Article'
-      within('#flash') { expect(page).to have_content(error_message) }
+      expect(page).to have_content(error_message)
     end
 
     it 'succeeds when submitting with valid input' do

@@ -9,7 +9,7 @@ class SessionsController <  ApplicationController
 
     if @session.valid?
       self.current_user = @session.user
-      redirect_to redirect_url ? redirect_url : :articles
+      redirect_to redirect_url || :articles
     else
       flash.now[:error] = 'The login and password combination is not valid'
       render :new

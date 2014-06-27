@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user_id = session[:user_id]
+    @article.user_id = current_user.id
     if @article.save
       redirect_to :articles
     else

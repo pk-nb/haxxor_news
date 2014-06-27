@@ -32,4 +32,6 @@ ActiveRecord::Schema.define(version: 20140626171206) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "articles", "users", name: "articles_user_id_fk"
+
 end
