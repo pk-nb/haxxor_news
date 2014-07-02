@@ -12,8 +12,6 @@
         .user
           span class='oi' data-glyph='person' title='person' aria-hidden="true"
           = article.user ? article.user.username : 'anonymous'
-        / - random_int = rand(1..20)
-        / - random_interval = ['minute', 'hour', 'day', 'month']
         .post-time
           span class='oi' data-glyph='clock' title='clock' aria-hidden="true"
           = time_ago_in_words(article.created_at) + ' ago'

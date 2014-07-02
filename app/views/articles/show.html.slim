@@ -8,5 +8,5 @@
       == render_markdown(comment.body)
   h2 Add comment
   = simple_form_for [@article, @comment] do |f|
-    = f.input :body
+    = f.input :body, label: 'Comment'
     = f.submit 'Post Comment'
