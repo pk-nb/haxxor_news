@@ -62,14 +62,15 @@ h2.title {
   display: table-cell;
 
   .comments,
-  .post-time {
+  .post-time,
+  .user {
     display: inline-block;
-    min-width: 130px;
+    // min-width: 130px;
   }
 
 }
 
-.votes {
+.article .votes {
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -91,11 +92,14 @@ h2.title {
   }
 }
 
-.comments {
+.article .post-time,
+.article .user {
   margin-right: 1em;
 }
 
-.comments span,
-.post-time span {
+.article .comments span,
+.article .post-time span,
+.article .user span, {
   font-size: 75%;
+  margin-right: 0.25em;
 }

@@ -9,14 +9,19 @@
         h2.title= link_to article.url do
           => article.title
           span= "(#{URI(article.url).host})"
-        .comments= link_to "#" do
-          span class='oi' data-glyph='chat' title='chat' aria-hidden="true"
-          |  comments (#{rand(500)})
+        .user
+          span class='oi' data-glyph='person' title='person' aria-hidden="true"
+          = article.user ? article.user.username : 'anonymous'
         - random_int = rand(1..20)
         - random_interval = ['minute', 'hour', 'day', 'month']
         .post-time
           span class='oi' data-glyph='clock' title='clock' aria-hidden="true"
-          |  #{pluralize(random_int, random_interval.sample)} ago
+          | #{pluralize(random_int, random_interval.sample)} ago
+        .comments= link_to "#" do
+          span class='oi' data-glyph='chat' title='chat' aria-hidden="true"
+          | comments (#{rand(500)})
+
+
 .page-numbers
   - if total_pages > 1
     - 1.upto(total_pages) do |n|
