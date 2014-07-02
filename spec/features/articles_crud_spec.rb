@@ -22,7 +22,7 @@ RSpec.describe 'Articles CRUD' do
   describe 'a visitor who is not logged in attempting to create a new article' do
     before do
       visit '/'
-      click_on 'New Article'
+      click_on 'new post'
     end
 
     let (:login_notice) { 'You must be logged in to post' }
@@ -42,7 +42,7 @@ RSpec.describe 'Articles CRUD' do
   describe 'a logged in user creating a new article' do
     before do
       valid_log_in
-      click_on 'New Article'
+      click_on 'new post'
     end
 
     let (:error_message) { 'Article was not posted' }

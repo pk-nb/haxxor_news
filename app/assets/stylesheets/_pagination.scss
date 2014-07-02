@@ -1,0 +1,35 @@
+.page-numbers {
+  text-align: center;
+  display: block;
+  padding: 1em 0;
+}
+
+.page-numbers a,
+.page-numbers a:visited {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  $side: 1.75em;
+  margin: 0 0.25em;
+  display: inline-block;
+  width: $side;
+  height: $side;
+  border: 2px solid $gray-main;
+  background-color: $gray-main;
+  border-radius: 100%;
+  color: $white-main;
+  font-weight: bold;
+  line-height: $side;
+  font-size: 1.25em;
+
+  &.current-page {
+    background-color: $orange-main;
+    border: 2px solid $orange-main;
+  }
+
+  &:hover {
+    background-color: $white-main;
+    border: 2px solid $orange-main;
+    color: $orange-main;
+  }
+}

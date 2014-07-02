@@ -8,7 +8,7 @@ RSpec.describe 'Login page' do
 
       before do
         visit '/'
-        click_on 'Login'
+        click_on 'login'
       end
 
       it 'should show error with no input' do
@@ -47,9 +47,9 @@ RSpec.describe 'Login page' do
         it 'can successfully logout' do
           expect(page).to have_content('user')
           expect(page).to_not have_content('Login')
-          click_on 'Logout'
+          click_on 'logout'
           expect(page).to_not have_content('user')
-          expect(page).to have_content('Login')
+          expect(page).to have_content('login')
         end
       end
     end
@@ -58,14 +58,14 @@ RSpec.describe 'Login page' do
   describe 'a new user' do
     before do
       visit '/'
-      click_on 'Sign Up'
+      click_on 'sign up'
       fill_new_user_form('user', 'test@email.com', 'password', 'password')
-      click_on 'Create User'
+      click_on 'Sign Up'
     end
 
     it 'should be logged in when new account is created' do
       expect(page).to have_content('user')
-      expect(page).to have_link('Logout')
+      expect(page).to have_link('logout')
     end
   end
 end

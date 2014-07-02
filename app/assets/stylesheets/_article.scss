@@ -1,0 +1,101 @@
+.article {
+  padding-bottom: 0.5em;
+  z-index: 0;
+}
+
+.article .num {
+  // http://codepen.io/ericrasch/pen/Irlpm
+  padding-right: 1em;
+  font-size: 1.25em;
+  font-weight: bold;
+  min-width: 3em;
+  position: relative;
+  z-index: -1;
+
+  &:before {
+    border-top: 1px dotted $border-color;
+    content: "";
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  a:before {
+    font-weight: normal;
+    font-family: "Helvetica", "Arial", sans-serif;
+    content: "№\2009"
+  }
+
+  a {
+    background-color: $white-main;
+    padding-right: 0.5em;
+  }
+}
+
+.article a span {
+  font-size: 0.75em;
+}
+
+.article-show {
+  border-left: 1px dotted $border-color;
+  padding: 1em;
+}
+
+h2.title {
+  font-size: 1.25em;
+  margin-bottom: 0.25em;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+}
+
+
+.article-detail {
+  display: table;
+  width: 100%;
+}
+
+.article-wrapper {
+  display: table-cell;
+
+  .comments,
+  .post-time {
+    display: inline-block;
+    min-width: 130px;
+  }
+
+}
+
+.votes {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  display: table-cell;
+  font-weight: bold;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1.125em;
+  width: 2em;
+  padding-right: 1em;
+
+  span {
+    display: block;
+  }
+
+  span.count {
+    top: -4px;
+    position: relative;
+  }
+}
+
+.comments {
+  margin-right: 1em;
+}
+
+.comments span,
+.post-time span {
+  font-size: 75%;
+}

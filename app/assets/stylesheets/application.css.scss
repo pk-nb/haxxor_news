@@ -7,13 +7,19 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *
  *= require_self
  */
 
 @import 'reset';
-
-$orange-main: #e65c16;
+@import 'fonts';
+@import 'constants';
+@import 'header';
+@import 'article';
+@import 'forms';
+@import 'pagination';
+@import 'open-iconic';
+// @import 'breakpoint'
 
 * {
   -moz-box-sizing: border-box;
@@ -22,53 +28,20 @@ $orange-main: #e65c16;
 }
 
 body {
-  font-family: sans-serif;
-  padding: 2em;
-}
-
-header {
-  font-family: monospace;
-  margin-bottom: 1em;
-  border-left: 0.5em solid $orange-main;
-  padding: 0.5em;
-  padding-left: 1em;
-}
-
-h1 {
-  font-size: 2em;
-  margin-bottom: 0.25em;
-}
-
-.article {
-  padding: 0.5em 0;
-}
-
-.article .num {
-  font-family: monospace;
-  padding-right: 1em;
-  font-size: 2em;
-}
-
-.article:not(:last-of-type) {
-  border-bottom: 1px dotted #aaa;
-}
-
-.article a span {
-  font-size: 0.75em;
-}
-
-.article-detail {
-  border-left: 1px dotted #aaa;
+  background-color: $white-main;
+  color: $black-main;
+  font-family: 'libertad', sans-serif;
+  font-feature-settings: "liga";
+  font-feature-settings: "onum";
   padding: 1em;
 }
 
-h2.title {
-  display: inline;
-  font-size: 1.25em;
+strong {
+  font-weight: bold;
 }
 
-a {
-  text-decoration: none;
+em {
+  font-style: italic;
 }
 
 a, a:visited {
@@ -77,26 +50,27 @@ a, a:visited {
 }
 
 a:hover {
-  background-color: rgba(168, 168, 168, 0.49);
+  background-color: $hover-color;
 }
+
 
 #flash-notice,
 #flash-error {
-  margin: 0 auto;
   text-align: center;
+  padding-bottom: 0.5em;
 }
 
 #flash-error .alert,
 #flash-notice .alert {
-  border-radius: 1em;
-  text-align: center;
+  display: inline-block;
   padding: 0.25em 0.5em;
+  width: fit-content;
 }
 
 #flash-notice .alert {
-  background-color: #ffeeba;
+  background-color: $alert-color;
 }
 
 #flash-error .alert {
-  background-color: #ffbdbd;
+  background-color: $error-color;
 }
