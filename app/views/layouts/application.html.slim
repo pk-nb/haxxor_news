@@ -22,9 +22,10 @@ html
           = link_to 'login', login_path
       .new-post= link_to new_article_path do
           | new post
-
+    / == render_markdown("http://stackoverflow.com/")
     #flash
       - flash.each do |key, value|
         = content_tag(:div, id: "flash-#{key}") do
           = content_tag(:span, value, class: "alert alert-#{key}")
+
     = yield

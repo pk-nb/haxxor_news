@@ -22,6 +22,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comment = Comment.new
   end
 
   private
@@ -41,10 +42,4 @@ class ArticlesController < ApplicationController
     (page - 1) * Article::PER_PAGE
   end
 
-  def require_logged_in
-    if !logged_in?
-      flash[:notice] = 'You must be logged in to post'
-      redirect_to login_path
-    end
-  end
 end

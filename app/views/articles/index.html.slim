@@ -17,10 +17,9 @@
         .post-time
           span class='oi' data-glyph='clock' title='clock' aria-hidden="true"
           | #{pluralize(random_int, random_interval.sample)} ago
-        .comments= link_to "#" do
+        .comments= link_to article_path(article, anchor: "article-comments") do
           span class='oi' data-glyph='chat' title='chat' aria-hidden="true"
           | comments (#{rand(500)})
-
 
 .page-numbers
   - if total_pages > 1

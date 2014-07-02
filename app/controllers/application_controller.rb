@@ -30,4 +30,11 @@ class ApplicationController < ActionController::Base
   def redirect_url
     session[:redirect_url]
   end
+
+  def require_logged_in
+    if !logged_in?
+      flash[:notice] = 'You must be logged in to post'
+      redirect_to login_path
+    end
+  end
 end
