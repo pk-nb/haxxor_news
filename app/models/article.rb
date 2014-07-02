@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
   belongs_to :user
+  has_many :comments
 
   PER_PAGE = 20
   validates :url, :title, presence: true
