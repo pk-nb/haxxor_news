@@ -9,7 +9,7 @@ RSpec.describe 'Comments and commenting: ' do
     context 'on the home page' do
       before do
         article = create :article
-        create_list :comment, 5, article: article
+        create_list :comment, 5, commentable: article
         visit '/'
       end
 
@@ -22,13 +22,13 @@ RSpec.describe 'Comments and commenting: ' do
     context 'viewing comments' do
       before do
         articles = create_list :article, 2
-        create_list :comment, 5, article: articles.last
+        create_list :comment, 5, commentable: articles.last
         visit '/'
       end
 
       it 'should see new comment form with no other articles' do
         click_on 'comments (0)'
-        expect(page).to have_field('Comment')
+        expect(page).to have_field('comment[body]')
       end
 
       it 'should see existing comments and new comment form with existing articles' do
@@ -41,7 +41,7 @@ RSpec.describe 'Comments and commenting: ' do
 
         before do
           click_on 'comments (0)'
-          fill_in 'Comment', with: comment_text
+          fill_in 'comment[body]', with: comment_text
           click_on 'Post Comment'
         end
 

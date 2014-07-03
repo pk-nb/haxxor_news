@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :comment do
     body 'Zee comment'
     user
-    article
+    association :commentable, factory: :article
   end
 end
