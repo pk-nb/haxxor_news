@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to redirect_url || :articles
     else
-      flash[:error] = 'Your comment was not posted — please correct errors below'
+      flash[:error] = 'Your comment was not posted — it cannot be empty'
       redirect_to redirect_url
     end
   end

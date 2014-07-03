@@ -15,7 +15,7 @@
         .post-time
           span class='oi' data-glyph='clock' title='clock' aria-hidden="true"
           = time_ago_in_words(article.created_at) + ' ago'
-        .comments= link_to article_path(article, anchor: "article-comments") do
+        .comments= link_to article do
           span class='oi' data-glyph='chat' title='chat' aria-hidden="true"
           | comments (#{article.comment_count})
 

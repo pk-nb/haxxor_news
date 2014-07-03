@@ -1,16 +1,54 @@
+#all-comments {
+  padding-top: 2em;
+
+  .reply-form {
+    margin-bottom: 1em;
+  }
+}
+
+#article-comments {
+  h1 {
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px dotted $gray-main;
+    padding-bottom: 0.25em;
+    margin-bottom: 0.5em;
+  }
+}
+
 .comment {
   border-left: 1px solid $gray-main;
-  padding-left: 2em;
+  padding-top: 0.5em;
+  padding-left: 1.5em;
+
+  .reply {
+    padding-bottom: 0.5em;
+    color: $gray-main;
+
+    .button:hover {
+      color: $orange-main;
+    }
+
+    span.oi {
+      font-size: 50%;
+      margin-right: 0.5em;
+    }
+  }
+
+  .body {
+    padding-top: 0.25em;
+  }
 }
 
 #article-comments form,
 .reply-form form {
-  // background-color: #aaa;
   margin: 0;
   text-align: left;
 
-  input {
+  input,
+  textarea {
     margin: 0;
+    font-size: 0.75em;
   }
 }
 

@@ -1,11 +1,15 @@
 .comment
-  h2= comment.user.username
+  h2
+    span class='oi' data-glyph='person' title='person' aria-hidden="true"
+    = comment.user.username
   .body
     == render_markdown comment.body
   .reply
-    p reply
+    span.button
+      span class='oi' data-glyph='comment-square' title='comment-square' aria-hidden="true"
+      | reply
   .reply-form.hidden
     = simple_form_for [comment, Comment.new] do |f|
-      = f.input :body, label: 'Comment'
-      = f.submit 'Post Comment'
+      = f.input :body, label: false
+      = f.submit 'Post Reply'
   = render comment.replies

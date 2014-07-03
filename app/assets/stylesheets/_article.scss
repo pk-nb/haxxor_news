@@ -39,9 +39,8 @@
   font-size: 0.75em;
 }
 
-.article-show {
-  border-left: 1px dotted $border-color;
-  padding: 1em;
+#article-show {
+  margin-bottom: 1em;
 }
 
 h2.title {
@@ -90,14 +89,7 @@ h2.title {
   }
 }
 
-.article .post-time,
-.article .user {
+.article-detail .post-time,
+.article-detail .user {
   margin-right: 1em;
-}
-
-.article .comments span,
-.article .post-time span,
-.article .user span, {
-  font-size: 75%;
-  margin-right: 0.25em;
 }
