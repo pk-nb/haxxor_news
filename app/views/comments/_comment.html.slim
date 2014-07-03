@@ -1,0 +1,12 @@
+.comment
+  h2= comment.user.username
+  .body
+    == render_markdown comment.body
+  .reply
+    p reply
+  .reply-form
+    p Add form here
+    = simple_form_for [@article, comment], url: article_comments_path do |f|
+      = f.hidden_field :parent_id, value: comment.id
+      = f.input :body, label: 'Comment'
+      = f.submit 'Post Comment'

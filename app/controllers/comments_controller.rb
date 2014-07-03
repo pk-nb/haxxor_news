@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :assign_article, only: [:create]
 
   def create
-    @comment = current_user.comments.build(comment_params.merge(article: @article))
+    @comment = current_user.comments.build(comment_params.merge(article: @article).merge(parent: @parent))
 
     if @comment.save
       redirect_to @article
@@ -16,11 +16,15 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:body, :user_id, :article_id)
+    params.require(:comment).permit(:body, :user_id, :article_id, :parent_id)
   end
 
   def assign_article
     @article = Article.find(params[:article_id])
     redirect_to articles_path unless @article
+  end
+
+  def assign_parent
+    @parent = Comment.find_by(params[:comment_id])
   end
 end
