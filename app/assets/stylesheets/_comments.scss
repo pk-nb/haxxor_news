@@ -1,0 +1,19 @@
+.comment {
+  border-left: 1px solid $gray-main;
+  padding-left: 2em;
+}
+
+#article-comments form,
+.reply-form form {
+  // background-color: #aaa;
+  margin: 0;
+  text-align: left;
+
+  input {
+    margin: 0;
+  }
+}
+
+.hidden {
+  display: none;
+}

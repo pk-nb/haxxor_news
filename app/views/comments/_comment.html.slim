@@ -4,9 +4,8 @@
     == render_markdown comment.body
   .reply
     p reply
-  .reply-form
-    p Add form here
-    = simple_form_for [@article, comment], url: article_comments_path do |f|
-      = f.hidden_field :parent_id, value: comment.id
+  .reply-form.hidden
+    = simple_form_for [comment, Comment.new] do |f|
       = f.input :body, label: 'Comment'
       = f.submit 'Post Comment'
+  = render comment.replies

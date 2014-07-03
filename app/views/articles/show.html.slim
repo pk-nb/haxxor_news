@@ -2,12 +2,8 @@
   h1= @article.title
   = link_to @article.url, @article.url
 #article-comments
-  = render @article.comments
-  / - @article.comments.each do |comment|
-  /   .comment
-  /     strong= comment.user.username
-  /     == render_markdown(comment.body)
   h2 Add comment
   = simple_form_for [@article, @comment] do |f|
     = f.input :body, label: 'Comment'
     = f.submit 'Post Comment'
+  = render @article.comments

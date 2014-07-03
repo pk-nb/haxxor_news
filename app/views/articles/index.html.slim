@@ -17,7 +17,7 @@
           = time_ago_in_words(article.created_at) + ' ago'
         .comments= link_to article_path(article, anchor: "article-comments") do
           span class='oi' data-glyph='chat' title='chat' aria-hidden="true"
-          | comments (#{article.comments.count})
+          | comments (#{article.comment_count})
 
 .page-numbers
   - if total_pages > 1

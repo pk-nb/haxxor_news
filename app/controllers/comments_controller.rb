@@ -1,16 +1,15 @@
 class CommentsController < ApplicationController
   skip_before_action :store_redirect_url
   before_action :require_logged_in, only: [:create]
-  before_action :assign_article, only: [:create]
+  before_action :assign_parent, only: [:create]
 
   def create
-    @comment = current_user.comments.build(comment_params.merge(article: @article).merge(parent: @parent))
-
+    @comment = current_user.comments.build(comment_params.merge(commentable: @parent))
     if @comment.save
-      redirect_to @article
+      redirect_to redirect_url || :articles
     else
-      flash.now[:error] = 'Your comment was not posted — please correct errors below'
-      render 'articles/show'
+      flash[:error] = 'Your comment was not posted — please correct errors below'
+      redirect_to redirect_url
     end
   end
 
@@ -19,12 +18,13 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body, :user_id, :article_id, :parent_id)
   end
 
-  def assign_article
-    @article = Article.find(params[:article_id])
-    redirect_to articles_path unless @article
+  def assign_parent
+    if params[:article_id]
+      @parent = Article.find(params[:article_id])
+    else params[:comment_id]
+      @parent = Comment.find(params[:comment_id])
+    end
+    redirect_to redirect_url unless @parent
   end
 
-  def assign_parent
-    @parent = Comment.find_by(params[:comment_id])
-  end
 end
