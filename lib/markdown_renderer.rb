@@ -1,7 +1,12 @@
-module MarkdownHelper
-  def render_markdown(markdown)
+class MarkdownRenderer
+  def to_html(raw)
+    render(raw)
+  end
+
+  private
+  def render(raw)
     # Clean up any possible junk HTML
-    Sanitize.fragment(md_renderer.render(markdown), Sanitize::Config.merge(
+    Sanitize.fragment(md_renderer.render(raw), Sanitize::Config.merge(
       Sanitize::Config::BASIC,
       elements: Sanitize::Config::BASIC[:elements] + ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
     ))

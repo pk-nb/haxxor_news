@@ -8,6 +8,6 @@ class Article < ActiveRecord::Base
   validates_length_of :title, in: 1..255
 
   def comment_count
-    self.comments.inject(self.comments.count) { |sum, comment| sum + comment.count_with_replies }
+    self.comments.inject(self.comments.count) { |sum, comment| sum + comment.reply_count }
   end
 end

@@ -1,9 +1,12 @@
 .comment
   h2
     span class='oi' data-glyph='person' title='person' aria-hidden="true"
-    = comment.user.username
+    - if comment.user.present?
+      = comment.user.username
+    - else
+      | anonymous
   .body
-    == render_markdown comment.body
+    == comment.to_html
   .reply
     span.button
       span class='oi' data-glyph='comment-square' title='comment-square' aria-hidden="true"

@@ -8,12 +8,16 @@ class Comment < ActiveRecord::Base
   validates :commentable_type, presence: true
   validates :body, presence: true
 
-  def count_with_replies
-    tally_replies(self)
+  def reply_count
+    if replies.any?
+      replies.inject(replies.count) { |sum, reply| sum + reply.reply_count }
+    else
+      0
+    end
   end
 
-  private
-  def tally_replies(comment)
-    comment.replies.inject(comment.replies.count) { |sum, reply| sum + reply.replies.count }
+  def to_html
+    @to_html ||= MarkdownRenderer.new.to_html(body)
   end
+
 end
