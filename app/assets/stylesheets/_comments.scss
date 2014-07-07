@@ -8,7 +8,7 @@
 }
 
 #article-comments {
-  h1 {
+  &>h1 {
     font-weight: bold;
     text-align: center;
     border-bottom: 1px dotted $gray-main;
@@ -58,4 +58,70 @@
 
 .hidden {
   display: none;
+}
+
+
+// Styles for comments from markdown
+.comment .body {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.25em;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 1.125em;
+  }
+
+  ul li {
+    list-style: disc inside;
+  }
+
+  ol li {
+    list-style: decimal inside;
+  }
+
+  blockquote {
+    border-left: 2px solid desaturate(lighten($orange-main, 20%), 20%);
+    padding-left: 1em;
+    color: darken($gray-main, 10%);
+  }
+
+  code {
+    font-family: monospace;
+    border: 1px solid $gray-main;
+    padding: 0 0.25em;
+  }
+
+  pre {
+    max-width: 30em;
+    margin-right: 1em;
+    overflow: scroll;
+    font-family: monospace;
+    border: 1px solid $gray-main;
+    padding: 0.25em;
+
+    code {
+      padding: 0;
+      border: none;
+    }
+  }
+
+  sup,
+  sub {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  sub {
+    bottom: -0.5em;
+  }
+
 }

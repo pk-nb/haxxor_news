@@ -39,24 +39,43 @@ RSpec.describe 'Comments and commenting: ' do
       context 'commenting on an article' do
         let(:comment_text) { 'This article made me cry' }
 
-        before do
-          click_on 'comments (0)'
-          fill_in 'comment[body]', with: comment_text
-          click_on 'Post Comment'
+        context 'with no other comments' do
+          before do
+            click_on 'comments (0)'
+            fill_in 'comment[body]', with: comment_text
+            click_on 'Post Comment'
+          end
+
+          it 'should show submitted comment' do
+            expect(page).to have_content comment_text
+          end
+
+          it 'should show an updated count on the articles page' do
+            visit '/'
+            expect(page).to have_content 'comments (1)'
+          end
         end
 
-        it 'should show submitted comment' do
-          expect(page).to have_content comment_text
-        end
+        context 'replying to another comment' do
+          before do
+            click_on 'comments (5)'
+            within('.comment:first-child') do
+              fill_in 'comment[body]', with: comment_text
+              click_on 'Post Reply'
+            end
+          end
 
-        it 'should show an updated count on the articles page' do
-          visit '/'
-          expect(page).to have_content 'comments (1)'
+          it 'should show reply' do
+            expect(page).to have_content comment_text
+          end
+
+          it 'should show an updated count on the articles page' do
+            visit '/'
+            expect(page).to have_content 'comments (6)'
+          end
         end
       end
 
     end
-
-
   end
 end

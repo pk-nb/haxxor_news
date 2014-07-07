@@ -1,6 +1,6 @@
 module MarkdownHelper
   def render_markdown(markdown)
-    # make class so we don't have to recreate renderer over and over?
+    # TODO make class so we don't have to recreate renderer over and over?
     renderer = Redcarpet::Render::HTML.new(filter_html: true)
     md_renderer ||= Redcarpet::Markdown.new(renderer, autolink: true, strikethrough: true, superscript: true)
 
