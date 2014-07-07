@@ -14,8 +14,13 @@
   h1
     span class='oi' data-glyph='chat' title='chat' aria-hidden="true"
     | comments (#{@article.comment_count})
-  = simple_form_for [@article, @comment] do |f|
-    = f.input :body, label: false
-    = f.submit 'Post Comment'
+  - if logged_in?
+    = simple_form_for [@article, @comment] do |f|
+      = f.input :body, label: false
+      = f.submit 'Post Comment'
+  - else
+    p
+      span class='oi' data-glyph='warning' title='warning' aria-hidden="true"
+      | You must be logged in to comment. #{ link_to 'Login', login_path }
   #all-comments
     = render @article.comments
