@@ -19,10 +19,10 @@ class CommentsController < ApplicationController
   end
 
   def assign_parent
-    if params[:article_id]
-      @parent = Article.find(params[:article_id])
-    else params[:comment_id]
-      @parent = Comment.find(params[:comment_id])
+    @parent = if params[:article_id]
+      Article.find(params[:article_id])
+    elsif params[:comment_id]
+      Comment.find(params[:comment_id])
     end
     redirect_to redirect_url unless @parent
   end

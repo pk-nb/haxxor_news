@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
   validates :commentable_type, presence: true
   validates :body, presence: true, length: { minimum: 1 }
 
-  def count_with_replies()
+  def count_with_replies
     tally_replies(self)
   end
 
