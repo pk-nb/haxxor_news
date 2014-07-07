@@ -46,6 +46,7 @@ gem 'normalize-rails'
 gem 'simple_form'
 gem 'bcrypt', '~> 3.1.7'
 gem 'foreigner'
+gem 'sanitize'
 
 group :test, :development do
   gem 'pry'

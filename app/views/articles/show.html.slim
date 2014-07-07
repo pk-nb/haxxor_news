@@ -1,3 +1,21 @@
-.article-show
-  h1= @article.title
-  = link_to @article.url, @article.url
+#article-show.article-detail
+  .article-wrapper
+    h2.title= link_to @article.url do
+      => @article.title
+      span= "(#{URI(@article.url).host})"
+    .user
+      span class='oi' data-glyph='person' title='person' aria-hidden="true"
+      = @article.user ? @article.user.username : 'anonymous'
+    .post-time
+      span class='oi' data-glyph='clock' title='clock' aria-hidden="true"
+      = time_ago_in_words(@article.created_at) + ' ago'
+
+#article-comments
+  h1
+    span class='oi' data-glyph='chat' title='chat' aria-hidden="true"
+    | comments (#{@article.comment_count})
+  = simple_form_for [@article, @comment] do |f|
+    = f.input :body, label: false
+    = f.submit 'Post Comment'
+  #all-comments
+    = render @article.comments

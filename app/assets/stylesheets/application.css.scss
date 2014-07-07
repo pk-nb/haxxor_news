@@ -18,8 +18,8 @@
 @import 'article';
 @import 'forms';
 @import 'pagination';
+@import 'comments';
 @import 'open-iconic';
-// @import 'breakpoint'
 
 * {
   -moz-box-sizing: border-box;
@@ -34,6 +34,12 @@ body {
   font-feature-settings: "liga";
   font-feature-settings: "onum";
   padding: 1em;
+}
+
+#main-container {
+  width: auto;
+  max-width: $max-width;
+  margin: 0 auto;
 }
 
 strong {
@@ -53,6 +59,10 @@ a:hover {
   background-color: $hover-color;
 }
 
+.oi {
+  font-size: 75%;
+  margin-right: 0.25em;
+}
 
 #flash-notice,
 #flash-error {

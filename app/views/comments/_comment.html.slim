@@ -1,0 +1,18 @@
+.comment
+  h2
+    span class='oi' data-glyph='person' title='person' aria-hidden="true"
+    - if comment.user.present?
+      = comment.user.username
+    - else
+      | anonymous
+  .body
+    == comment.to_html
+  .reply
+    span.button
+      span class='oi' data-glyph='comment-square' title='comment-square' aria-hidden="true"
+      | reply
+  .reply-form.hidden
+    = simple_form_for [comment, Comment.new] do |f|
+      = f.input :body, label: false
+      = f.submit 'Post Reply'
+  = render comment.replies

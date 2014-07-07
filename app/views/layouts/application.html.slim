@@ -8,23 +8,25 @@ html
     = csrf_meta_tags
     meta name="viewport" content='width=device-width initial-scale=1'
   body
-    header
-      = link_to root_path do
-        h1= 'haxxor news'
-      .log-links
-        - if logged_in?
-          strong= current_user.username
-          br
-          = link_to 'logout', logout_path
-        - else
-          = link_to 'sign up', signup_path
-          br
-          = link_to 'login', login_path
-      .new-post= link_to new_article_path do
-          | new post
+    #main-container
+      header
+        = link_to root_path do
+          h1= 'haxxor news'
+        .log-links
+          - if logged_in?
+            strong= current_user.username
+            br
+            = link_to 'logout', logout_path
+          - else
+            = link_to 'sign up', signup_path
+            br
+            = link_to 'login', login_path
+        .new-post= link_to new_article_path do
+            | new post
+      #flash
+        - flash.each do |key, value|
+          = content_tag(:div, id: "flash-#{key}") do
+            = content_tag(:span, value, class: "alert alert-#{key}")
 
-    #flash
-      - flash.each do |key, value|
-        = content_tag(:div, id: "flash-#{key}") do
-          = content_tag(:span, value, class: "alert alert-#{key}")
-    = yield
+      = yield
+      = javascript_include_tag 'application', 'data-turbolinks-track' => true

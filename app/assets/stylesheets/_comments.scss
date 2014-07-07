@@ -1,0 +1,127 @@
+#all-comments {
+  padding-top: 2em;
+
+  .reply-form {
+    margin-bottom: 1em;
+    padding-right: 0.5em;
+  }
+}
+
+#article-comments {
+  &>h1 {
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px dotted $gray-main;
+    padding-bottom: 0.25em;
+    margin-bottom: 0.5em;
+  }
+}
+
+.comment {
+  border-left: 1px solid $gray-main;
+  border-right: 2px solid $gray-main;
+  padding-top: 0.5em;
+  padding-left: 1.5em;
+
+  .reply {
+    padding-bottom: 0.5em;
+    color: $gray-main;
+
+
+    .button:hover {
+      color: $orange-main;
+      cursor: pointer;
+    }
+
+    span.oi {
+      font-size: 50%;
+      margin-right: 0.5em;
+    }
+  }
+
+  .body {
+    padding-top: 0.25em;
+  }
+}
+
+#article-comments form,
+.reply-form form {
+  margin: 0;
+  text-align: left;
+
+  input,
+  textarea {
+    margin: 0;
+    font-size: 0.75em;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+
+// Styles for comments from markdown
+.comment .body {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.25em;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 1.125em;
+  }
+
+  ul li {
+    list-style: disc inside;
+  }
+
+  ol li {
+    list-style: decimal inside;
+  }
+
+  blockquote {
+    border-left: 2px solid desaturate(lighten($orange-main, 20%), 20%);
+    padding-left: 1em;
+    color: darken($gray-main, 10%);
+  }
+
+  code {
+    font-family: monospace;
+    border: 1px solid $gray-main;
+    padding: 0 0.25em;
+  }
+
+  pre {
+    max-width: 30em;
+    margin-right: 1em;
+    overflow: scroll;
+    font-family: monospace;
+    border: 1px solid $gray-main;
+    padding: 0.25em;
+
+    code {
+      padding: 0;
+      border: none;
+    }
+  }
+
+  sup,
+  sub {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  sub {
+    bottom: -0.5em;
+  }
+
+}

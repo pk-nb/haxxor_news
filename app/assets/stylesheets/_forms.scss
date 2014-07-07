@@ -52,12 +52,14 @@ form .error {
 }
 
 
-form input {
+form input,
+form textarea {
   width: 100%;
   font: inherit;
   border: 1px solid $black-main;
   outline: none;
   padding: 0.25em;
+  resize: none;
 
   &:focus {
     border: 1px solid $orange-main;
