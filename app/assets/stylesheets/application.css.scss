@@ -36,6 +36,12 @@ body {
   padding: 1em;
 }
 
+#main-container {
+  width: auto;
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
 strong {
   font-weight: bold;
 }
