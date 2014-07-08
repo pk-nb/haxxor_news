@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
   resources :sessions, only: [:new, :create, :destroy]
-  resources :password_resets, only: [:new, :create, :edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   get 'signup', to: 'users#new', as: :signup
   get 'login', to: 'sessions#new', as: :login

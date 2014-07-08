@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  def password_reset_expired?
+    !(!self.password_reset_sent_at.nil? && self.password_reset_sent_at > 2.hours.ago)
+  end
+
   private
   def generate_token
     SecureRandom.urlsafe_base64
