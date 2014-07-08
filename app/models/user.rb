@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   def password_reset
     self.password_reset_token = generate_token
     self.password_reset_sent_at = Time.zone.now
-    save!
+    save validate: false # skip pesky password length validation
     UserMailer.password_reset(self).deliver
   end
 

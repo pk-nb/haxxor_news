@@ -19,4 +19,18 @@ RSpec.describe User do
   it { should allow_value('goodname', '$this_is_fine$', '*$()!!whynot!!()$*').for(:username) }
   it { should_not allow_value('name@', '#nameguy').for(:username) }
 
+  describe '#password_reset' do
+    let(:user) { create :user }
+
+    it 'correctly updates columns' do
+      user.password_reset
+      expect(user.password_reset_token).to_not be_nil
+      expect(user.password_reset_sent_at).to_not be_nil
+    end
+
+    it 'sends an email' do
+      expect {user.password_reset }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+  end
+
 end
