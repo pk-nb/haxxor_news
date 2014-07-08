@@ -10,4 +10,16 @@ class User < ActiveRecord::Base
   validates :username, presence: true, length: { in: 4..32 }, uniqueness: { case_sensitive: false }, format: { with: legal_chars }
   validates :email, presence: true, uniqueness: { case_sensitive: false }, email: true
   validates :password, length: { minimum: 8 }
+
+  def password_reset
+    self.password_reset_token = generate_token
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+
+  private
+  def generate_token
+    SecureRandom.urlsafe_base64
+  end
 end
