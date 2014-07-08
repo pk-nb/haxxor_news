@@ -6,6 +6,11 @@ class PasswordReset
 
 
   def update_user(user)
-    raise 'PasswordReset#update_user not implemented'
+    if user.update_attributes(password: password, password_confirmation: password_confirmation)
+      user.remove_password_reset_token
+      true
+    else
+      false
+    end
   end
 end

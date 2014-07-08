@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
     !(!self.password_reset_sent_at.nil? && self.password_reset_sent_at > 2.hours.ago)
   end
 
+  def remove_password_reset_token
+    self.password_reset_token = nil
+    self.password_reset_sent_at = nil
+  end
+
   private
   def generate_token
     SecureRandom.urlsafe_base64
