@@ -29,7 +29,7 @@ RSpec.describe User do
     end
 
     it 'sends an email' do
-      expect {user.password_reset }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect { user.password_reset }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 

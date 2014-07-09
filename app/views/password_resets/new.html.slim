@@ -1,3 +1,3 @@
-= simple_form_for @password_reset do |f|
+= simple_form_for @password_reset, url: reset_index_path  do |f|
   = f.input :email
   = f.submit 'Send Reset Email'
