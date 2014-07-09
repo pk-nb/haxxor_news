@@ -4,9 +4,11 @@ describe UserMailer do
 
   describe '#password_reset' do
     context 'mail correctly generated' do
-      let (:user) { create :user }
-      let (:mail) do
-        user.password_reset
+      let! (:user) { create :user }
+      let! (:password_reset) { create_password_reset(user) }
+      let! (:mail) do
+        password_reset.save
+        user.reload
         UserMailer.password_reset(user)
       end
 

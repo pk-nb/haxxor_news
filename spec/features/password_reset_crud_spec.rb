@@ -21,7 +21,7 @@ RSpec.describe 'Password reset:' do
       it 'should not get any information when maliciously puts in random emails' do
         fill_in 'Email', with: nonexistant_email
         expect{ click_on 'Send Reset Email' }.to_not change { ActionMailer::Base.deliveries.count }.by(1)
-        expect(page).to have_content('Password reset email sent')
+        expect(page).to have_content('User not found')
       end
 
       it 'should have email reset with correct email' do
@@ -64,11 +64,7 @@ RSpec.describe 'Password reset:' do
             expect(page).to have_content('Password successfully updated')
           end
 
-          it 'should be able to login with new password' do
-            click_on 'login'
-            fill_in 'Login', with: user.username
-            fill_in 'Password', with: new_password
-            click_on 'Login'
+          it 'should be logged in' do
             expect(page).to have_content(user.username)
             expect(page).to have_content('logout')
           end

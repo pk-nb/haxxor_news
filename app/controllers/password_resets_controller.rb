@@ -5,41 +5,33 @@ class PasswordResetsController < ApplicationController
 
   def create
     @password_reset = PasswordReset.new(reset_params)
-    if @password_reset.valid?
-      user = User.find_by email: params[:password_reset][:email]
-      user.password_reset if user
-      # Tell user email sent even if user doesn't exist
-      flash[:notice] = 'Password reset email sent'
-      redirect_to root_url
+    if @password_reset.save
+      redirect_to root_url, :notice => 'Password reset email sent'
     else
-      flash.now[:error] = 'Please enter in a valid email address'
+      @password_reset.errors.full_messages.each do |message|
+        flash.now[:error] = message
+      end
       render :new
     end
   end
 
   def edit
-    @user = User.find_by password_reset_token: params[:id]
-    if @user && !@user.password_reset_expired?
-      @password_reset = PasswordReset.new
-    else
+    @password_reset = PasswordReset.find(params[:id])
+    if @password_reset.nil? || @password_reset.expired?
       flash[:error] = 'Password reset link expired' if @user.password_reset_expired?
       redirect_to root_url
     end
   end
 
   def update
-    @password_reset = PasswordReset.new(reset_params)
-    if @password_reset.valid?
-      @user = User.find_by password_reset_token: params[:id]
-      if @password_reset.update_user(@user)
-        flash[:notice] = 'Password successfully updated'
-      else
-        flash[:error] = 'Could not update password'
-      end
+    @password_reset = PasswordReset.find(params[:id])
+    if @password_reset.update_attributes(reset_params)
+      self.current_user = @password_reset.user
+      flash[:notice] = 'Password successfully updated'
       redirect_to root_url
     else
       flash.now[:error] = 'Password was not updated—please correct fields below'
-      render :edit
+      render 'edit'
     end
   end
 

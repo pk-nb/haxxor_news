@@ -11,20 +11,16 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }, email: true
   validates :password, length: { minimum: 8 }
 
-  def password_reset
+  def add_reset_token
     self.password_reset_token = generate_token
     self.password_reset_sent_at = Time.zone.now
-    save validate: false # skip pesky password length validation
-    UserMailer.password_reset(self).deliver
+    save validate: false
   end
 
-  def password_reset_expired?
-    !(!self.password_reset_sent_at.nil? && self.password_reset_sent_at > 2.hours.ago)
-  end
-
-  def remove_password_reset_token
+  def remove_reset_token
     self.password_reset_token = nil
     self.password_reset_sent_at = nil
+    save validate: false
   end
 
   private
