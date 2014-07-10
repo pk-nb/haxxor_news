@@ -8,9 +8,7 @@ class PasswordResetsController < ApplicationController
     if @password_reset.save
       redirect_to root_url, :notice => 'Password reset email sent'
     else
-      @password_reset.errors.full_messages.each do |message|
-        flash.now[:error] = message
-      end
+      flash.now[:error] = message = @password_reset.errors.full_messages.first
       render :new
     end
   end
