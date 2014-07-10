@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe Comment do
+  it_behaves_like 'a votable object' do
+    let(:type) { :comment }
+  end
+
   it { should validate_presence_of(:body) }
   it { should validate_presence_of(:commentable_id) }
   it { should validate_presence_of(:commentable_type) }

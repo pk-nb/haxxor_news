@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe Article, :type => :model do
+  it_behaves_like 'a votable object' do
+    let(:type) { :article }
+  end
 
   it { should validate_presence_of(:url) }
   it { should validate_presence_of(:title) }

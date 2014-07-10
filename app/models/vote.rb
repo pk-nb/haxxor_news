@@ -1,8 +1,9 @@
 class Vote < ActiveRecord::Base
   belongs_to :votable, polymorphic: true
 
-  def score
-    # find all votes with same parent type and id
-    # return tally of +1 and -1
-  end
+  validates :user_id, presence: true
+  validates :votable_id, presence: true
+  validates :votable_type, presence: true
+  validates :direction, inclusion: { in: [-1, 1] }
+
 end

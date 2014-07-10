@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :vote do
-    direction false
-    votable nil
+    direction 1
+    user_id factory: :user
+    association :votable, factory: :article
   end
 end
