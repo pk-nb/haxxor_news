@@ -1,0 +1,4 @@
+= simple_form_for @password_reset, url: reset_path(params[:id]), method: :put do |f|
+  = f.input :password
+  = f.input :password_confirmation
+  = f.submit 'Reset Password'

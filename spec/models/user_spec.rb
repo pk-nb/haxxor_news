@@ -19,4 +19,22 @@ RSpec.describe User do
   it { should allow_value('goodname', '$this_is_fine$', '*$()!!whynot!!()$*').for(:username) }
   it { should_not allow_value('name@', '#nameguy').for(:username) }
 
+  describe 'reset tokens' do
+    let!(:user) { create :user }
+
+    it 'correctly updates columns' do
+      user.add_reset_token
+      expect(user.password_reset_token).to_not be_nil
+      expect(user.password_reset_sent_at).to_not be_nil
+    end
+
+    describe '#remove_password_reset_token' do
+      it 'should remove columns correctly' do
+        user.add_reset_token
+        user.remove_reset_token
+        expect(user.password_reset_token).to be_nil
+        expect(user.password_reset_sent_at).to be_nil
+      end
+    end
+  end
 end

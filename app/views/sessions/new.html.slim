@@ -1,4 +1,6 @@
 = simple_form_for @session do |f|
   = f.input :login
   = f.input :password
+  p
+    em Forgot your password? #{ link_to 'Reset it here', new_reset_path }
   = f.submit 'Login'

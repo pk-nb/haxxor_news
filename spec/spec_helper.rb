@@ -17,4 +17,5 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include UserCreateHelper, type: :feature
   config.include FillLoginHelper, type: :feature
+  config.include PasswordResetCreateHelper
 end
