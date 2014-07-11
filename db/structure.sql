@@ -243,6 +243,13 @@ CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
+-- Name: index_votes_on_user_id_and_votable_id_and_votable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_votes_on_user_id_and_votable_id_and_votable_type ON votes USING btree (user_id, votable_id, votable_type);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -296,4 +303,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140708153001');
 INSERT INTO schema_migrations (version) VALUES ('20140709195956');
 
 INSERT INTO schema_migrations (version) VALUES ('20140710185415');
+
+INSERT INTO schema_migrations (version) VALUES ('20140711195510');
 

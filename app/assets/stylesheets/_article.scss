@@ -1,5 +1,5 @@
 .article {
-  padding-bottom: 0.5em;
+  // padding-bottom: 0.5em;
   z-index: 0;
 }
 
@@ -83,11 +83,16 @@ h2.title {
     margin: 0;
   }
 
+  a.down {
+    position: relative;
+    top: -0.3em;
+  }
+
   span {
     display: block;
   }
 
-  span.count {
+  span.score {
     top: -4px;
     position: relative;
   }

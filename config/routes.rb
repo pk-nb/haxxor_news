@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   resources :articles, only: [:new, :create, :show, :index] do
     resources :comments, only: [:create]
+    resources :votes, only: [:create, :destroy, :update]
   end
 
   resources :comments, only: [] do
     resources :comments, only: [:create]
+    resources :votes, only: [:create, :destroy, :update]
   end
 
   resources :users, only: [:new, :create, :show]
