@@ -16,7 +16,7 @@ class PasswordResetsController < ApplicationController
   def edit
     @password_reset = PasswordReset.find(params[:id])
     if @password_reset.nil? || @password_reset.expired?
-      flash[:error] = 'Password reset link expired' if @password_reset.expired?
+      flash[:error] = 'Password reset link expired' if !@password_reset.nil? && @password_reset.expired?
       redirect_to root_url
     end
   end
