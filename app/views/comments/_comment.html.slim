@@ -1,23 +1,34 @@
 .comment
-  h2
-    span class='oi' data-glyph='person' title='person' aria-hidden="true"
-    - if comment.user.present?
-      = comment.user.username
-    - else
-      | anonymous
-  .body
-    == comment.to_html
-  .reply
-    span.button
-      span class='oi' data-glyph='comment-square' title='comment-square' aria-hidden="true"
-      | reply
-  .reply-form.hidden
-    - if logged_in?
-      = simple_form_for [comment, Comment.new] do |f|
-        = f.input :body, label: false
-        = f.submit 'Post Reply'
-    - else
-      p
-        span class='oi' data-glyph='warning' title='warning' aria-hidden="true"
-        | You must be logged in to reply. #{ link_to 'Login', login_path }
+  .comment-wrapper
+    - vote_class = ''
+    - if user_vote = comment.user_vote(current_user)
+      - vote_class = user_vote.direction == 1 ? 'upvoted' : 'downvoted'
+    .votes class="#{vote_class}"
+      = link_to comment_upvote_path(comment_id: comment.id), remote: true, method: :post, class: 'up vote'
+        span class='oi' data-glyph='caret-top' title='caret-top' aria-hidden='true'
+      span.score= comment.score
+      = link_to comment_downvote_path(comment_id: comment.id), remote: true, method: :post, class: 'down vote'
+        span class='oi' data-glyph='caret-bottom' title='caret-bottom' aria-hidden='true'
+    .comment-content
+      h2
+        span class='oi' data-glyph='person' title='person' aria-hidden="true"
+        - if comment.user.present?
+          = comment.user.username
+        - else
+          | anonymous
+      .body
+        == comment.to_html
+      .reply
+        span.button
+          span class='oi' data-glyph='comment-square' title='comment-square' aria-hidden="true"
+          | reply
+      .reply-form.hidden
+        - if logged_in?
+          = simple_form_for [comment, Comment.new] do |f|
+            = f.input :body, label: false
+            = f.submit 'Post Reply'
+        - else
+          p
+            span class='oi' data-glyph='warning' title='warning' aria-hidden="true"
+            | You must be logged in to reply. #{ link_to 'Login', login_path }
   = render comment.replies
