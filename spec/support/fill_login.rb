@@ -14,7 +14,7 @@ module FillLoginHelper
   end
 
   def valid_log_in
-    user = create(:user)
+    user = create :user
     log_in(user.username, user.password)
   end
 end

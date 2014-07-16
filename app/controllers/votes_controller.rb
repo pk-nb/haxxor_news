@@ -11,14 +11,18 @@ class VotesController < ApplicationController
 
   private
   def toggle_vote(direction)
-    @vote = Vote.find_or_create_by(votable: votable, user_id: current_user.id)
-    if @vote.direction == direction
-      @vote.destroy
-      :destroyed
+    if logged_in?
+      @vote = Vote.find_or_create_by(votable: votable, user_id: current_user.id)
+      if @vote.direction == direction
+        @vote.destroy
+        :destroyed
+      else
+        @vote.direction = direction
+        @vote.save
+        direction == 1 ? :upvoted : :downvoted
+      end
     else
-      @vote.direction = direction
-      @vote.save
-      direction == 1 ? :upvoted : :downvoted
+      :not_logged_in
     end
   end
 

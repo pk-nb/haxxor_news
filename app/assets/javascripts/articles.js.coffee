@@ -1,5 +1,5 @@
 # Toggle Reply
-$(".comment").each ->
+$(".comment-content").each ->
   $this = $(this)
   $button = $this.find("> .reply")
   $form = $this.find("> .reply-form")

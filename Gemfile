@@ -56,6 +56,10 @@ end
 
 group :test do
   gem 'capybara'
+  # gem 'poltergeist'
+  # gem 'selenium-webdriver'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'launchy', :require => false
 end
