@@ -6,7 +6,7 @@ module Votable
   end
 
   def score
-    self.votes.inject(0) { |sum, vote| sum += vote.direction }
+    votes.sum(:direction)
   end
 
   def user_vote(user)

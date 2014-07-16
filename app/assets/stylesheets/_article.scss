@@ -83,6 +83,15 @@ h2.title {
     margin: 0;
   }
 
+  a,
+  a:visited {
+    color: $gray-main;
+  }
+
+  a:hover {
+    color: $orange-main;
+  }
+
   a.down {
     position: relative;
     top: -0.3em;
@@ -101,4 +110,20 @@ h2.title {
 .article-detail .post-time,
 .article-detail .user {
   margin-right: 1em;
+}
+
+.votes.upvoted {
+  a.up,
+  a.up:visited,
+  {
+    color: $orange-main;
+  }
+}
+
+.votes.downvoted {
+  a.down,
+  a.down:visited,
+  {
+    color: $orange-main;
+  }
 }

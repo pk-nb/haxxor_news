@@ -1,44 +1,37 @@
 class VotesController < ApplicationController
   respond_to :json
-  before_action :assign_parent
 
-  def create
-    @vote = Vote.new(votable: @parent, user_id: current_user.id, direction: params[:direction])
-    if @vote.save
-      render json: {vote: @vote,
-                    method: :create,
-                    newScore: @parent.score,
-                    newLink: @vote.url }
-    else
-      render json: @vote.errors, status: :error
-    end
+  def upvote
+    render json: { vote: toggle_vote(1), newScore: votable.score }
   end
 
-  def destroy
-    @vote = Vote.where(votable: @parent, user_id: current_user.id).first # parent stuff)
-    if @vote.destroy
-      render json: {vote: @vote, method: :destroy, newScore: @parent.score}
-    else
-      render json: @vote.errors, status: :error
-    end
-  end
-
-  def update
-
+  def downvote
+    render json: { vote: toggle_vote(-1), newScore: votable.score }
   end
 
   private
+  def toggle_vote(direction)
+    @vote = Vote.find_or_create_by(votable: votable, user_id: current_user.id)
+    if @vote.direction == direction
+      @vote.destroy
+      :destroyed
+    else
+      @vote.direction = direction
+      @vote.save
+      direction == 1 ? :upvoted : :downvoted
+    end
+  end
+
   def vote_params
     params.require(:vote).permit(:direction, :user_id, :article_id, :comment_id)
   end
 
-  def assign_parent
-    @parent = if params[:article_id]
+  def votable
+    @votable ||= if params[:article_id]
       Article.find(params[:article_id])
     elsif params[:comment_id]
       Comment.find(params[:comment_id])
     end
-    # redirect_to redirect_url unless @parent
   end
 
 end

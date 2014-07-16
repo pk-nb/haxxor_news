@@ -2,35 +2,14 @@
   .article
     .num= link_to index, article
     .article-detail
-      .votes
-        - if logged_in?
-          - user_vote = article.user_vote(current_user)
-          - if !user_vote.nil?
-            / Voted case
-            - up_vote_link = article_vote_path(article_id: article.id, id: user_vote.id, direction: 1)
-            - down_vote_link = article_vote_path(article_id: article.id, id: user_vote.id, direction: -1)
-            - if user_vote.direction == 1
-              - up_vote_method = :delete
-              - down_vote_method = :put
-            - else
-              - up_vote_method = :put
-              - down_vote_method = :delete
-          - else
-            / Haven't voted
-            - up_vote_link = article_votes_path(article_id: article.id, direction: 1)
-            - down_vote_link = article_votes_path(article_id: article.id, direction: -1)
-            - up_vote_method = :post
-            - down_vote_method = :post
-        - else
-          / redirect to login
-          - up_vote_link = '#'
-          - down_vote_link = '#'
-          - up_vote_method = :post
-          - down_vote_method = :post
-        = link_to up_vote_link, remote: true, method: up_vote_method, class: 'up vote'
+      - vote_class = ''
+      - if user_vote = article.user_vote(current_user)
+        - vote_class = user_vote.direction == 1 ? 'upvoted' : 'downvoted'
+      .votes class="#{vote_class}"
+        = link_to article_upvote_path(article_id: article.id), remote: true, method: :post, class: 'up vote'
           span class='oi' data-glyph='caret-top' title='caret-top' aria-hidden='true'
         span.score= article.score
-        = link_to down_vote_link, remote: true, method: down_vote_method, class: 'down vote'
+        = link_to article_downvote_path(article_id: article.id), remote: true, method: :post, class: 'down vote'
           span class='oi' data-glyph='caret-bottom' title='caret-bottom' aria-hidden='true'
       .article-wrapper
         h2.title= link_to article.url do
