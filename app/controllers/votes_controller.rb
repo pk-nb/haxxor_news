@@ -1,6 +1,8 @@
 class VotesController < ApplicationController
   respond_to :json
+
   skip_before_action :store_redirect_url
+  before_action :require_login, unless: :logged_in?
 
   def upvote
     render json: vote_response(1)
@@ -10,28 +12,32 @@ class VotesController < ApplicationController
     render json: vote_response(-1)
   end
 
+
   private
+
+  def require_login
+    render json: { vote: :not_logged_in }
+  end
+
   def vote_response(direction)
-    vote_status = toggle_vote(direction)
     {
-      vote: vote_status,
-      newScore: vote_status == :not_logged_in ? nil : votable.score
+      vote:     toggle_vote(direction),
+      newScore: votable.score
     }
   end
 
   def toggle_vote(direction)
-    if logged_in?
-      vote = Vote.find_or_create_by(votable: votable, user_id: current_user.id)
-      if vote.direction == direction
-        vote.destroy
-        :destroyed
-      else
-        vote.update_attributes(direction: direction)
-        direction == 1 ? :upvoted : :downvoted
-      end
+    if vote.direction == direction
+      vote.destroy and return :destroyed
+    elsif vote.update_attributes(direction: direction)
+      vote.upvote? ? :upvoted : :downvoted
     else
-      :not_logged_in
+      :error
     end
+  end
+
+  def vote
+    @vote ||= Vote.find_or_create_by(votable: votable, user: current_user)
   end
 
   def votable
@@ -39,7 +45,8 @@ class VotesController < ApplicationController
       Article.find(params[:article_id])
     elsif params[:comment_id]
       Comment.find(params[:comment_id])
+    else
+      render_404
     end
   end
-
 end

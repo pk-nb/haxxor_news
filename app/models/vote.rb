@@ -8,10 +8,10 @@ class Vote < ActiveRecord::Base
   validates :direction, inclusion: { in: [-1, 1] }
 
   def upvote?
-    self.direction == 1
+    direction == 1
   end
 
   def downvote?
-    self.direction == -1
+    direction == -1
   end
 end

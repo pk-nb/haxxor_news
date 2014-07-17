@@ -13,6 +13,6 @@ $ ->
     score = $this.siblings('.score')
 
     # Update score and class on vote change
-    score.text(data.newScore) if data.newScore != null
-    unless data.status == "not_logged_in"
+    score.text(data.newScore)# if "newScore" in data
+    unless data.vote == "not_logged_in" || data.vote == "error"
       votes_container.removeClass("upvoted downvoted destroyed").addClass(data.vote)
