@@ -5,8 +5,6 @@ $(".comment-content").each ->
   $form = $this.find("> .reply-form")
   $button.on "click", ->
     $form.toggleClass "hidden"
-    return
-  return
 
 $ ->
   $(".votes a[data-remote]").on "ajax:success", (e, data, status, xhr) ->
@@ -15,10 +13,6 @@ $ ->
     score = $this.siblings('.score')
 
     # Update score and class on vote change
-    score.text(data.newScore)
-    votes_container.removeClass("upvoted downvoted destroyed").addClass(data.vote)
-
-$ ->
-  $(".votes a[data-remote]").on "ajax:error", (e, xhr, status) ->
-    console.log xhr.responseText
-    console.log status
+    score.text(data.newScore) if data.newScore != null
+    unless data.status == "not_logged_in"
+      votes_container.removeClass("upvoted downvoted destroyed").addClass(data.vote)

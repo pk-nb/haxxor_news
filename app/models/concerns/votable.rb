@@ -10,6 +10,6 @@ module Votable
   end
 
   def user_vote(user)
-    self.votes.where(user_id: user.id).first
+    user.present? ? self.votes.where(user_id: user.id).first : nil
   end
 end

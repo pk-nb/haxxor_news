@@ -3,22 +3,10 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
-# require 'capybara/poltergeist'
-
-# Capybara.javascript_driver = :webkit
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-Capybara.configure do |config|
-  config.javascript_driver = :webkit
-  config.default_wait_time = 30
-end
-
 RSpec.configure do |config|
-  # Run specs in random order to surface order dependencies. If you find an
-  # order dependency and want to debug it, you can fix the order by providing
-  # the seed, which is printed after each run.
-  #     --seed 1234
   ActiveRecord::Migration.maintain_test_schema!
   config.order = :random
   config.use_transactional_fixtures = false

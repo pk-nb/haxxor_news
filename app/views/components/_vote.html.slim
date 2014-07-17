@@ -1,0 +1,6 @@
+.votes class="#{vote_class_for(votable)}"
+  = link_to polymorphic_path([votable, :upvote]), remote: true, method: :post, class: 'up vote'
+    span class='oi' data-glyph='caret-top' title='caret-top' aria-hidden='true'
+  span.score= votable.score
+  = link_to polymorphic_path([votable, :downvote]), remote: true, method: :post, class: 'down vote'
+    span class='oi' data-glyph='caret-bottom' title='caret-bottom' aria-hidden='true'

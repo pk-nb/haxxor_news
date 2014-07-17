@@ -1,33 +1,37 @@
 class VotesController < ApplicationController
   respond_to :json
+  skip_before_action :store_redirect_url
 
   def upvote
-    render json: { vote: toggle_vote(1), newScore: votable.score }
+    render json: vote_response(1)
   end
 
   def downvote
-    render json: { vote: toggle_vote(-1), newScore: votable.score }
+    render json: vote_response(-1)
   end
 
   private
+  def vote_response(direction)
+    vote_status = toggle_vote(direction)
+    {
+      vote: vote_status,
+      newScore: vote_status == :not_logged_in ? nil : votable.score
+    }
+  end
+
   def toggle_vote(direction)
     if logged_in?
-      @vote = Vote.find_or_create_by(votable: votable, user_id: current_user.id)
-      if @vote.direction == direction
-        @vote.destroy
+      vote = Vote.find_or_create_by(votable: votable, user_id: current_user.id)
+      if vote.direction == direction
+        vote.destroy
         :destroyed
       else
-        @vote.direction = direction
-        @vote.save
+        vote.update_attributes(direction: direction)
         direction == 1 ? :upvoted : :downvoted
       end
     else
       :not_logged_in
     end
-  end
-
-  def vote_params
-    params.require(:vote).permit(:direction, :user_id, :article_id, :comment_id)
   end
 
   def votable

@@ -2,22 +2,14 @@
   .article
     .num= link_to index, article
     .article-detail
-      - vote_class = ''
-      - if logged_in? && user_vote = article.user_vote(current_user)
-        - vote_class = user_vote.direction == 1 ? 'upvoted' : 'downvoted'
-      .votes class="#{vote_class}"
-        = link_to article_upvote_path(article_id: article.id), remote: true, method: :post, class: 'up vote'
-          span class='oi' data-glyph='caret-top' title='caret-top' aria-hidden='true'
-        span.score= article.score
-        = link_to article_downvote_path(article_id: article.id), remote: true, method: :post, class: 'down vote'
-          span class='oi' data-glyph='caret-bottom' title='caret-bottom' aria-hidden='true'
+      = render partial: 'components/vote', locals: { votable: article }
       .article-wrapper
         h2.title= link_to article.url do
           => article.title
           span= "(#{URI(article.url).host})"
         .user
           span class='oi' data-glyph='person' title='person' aria-hidden="true"
-          = article.user ? article.user.username : 'anonymous'
+          = article.user.try(:username) || 'anonymous'
         .post-time
           span class='oi' data-glyph='clock' title='clock' aria-hidden="true"
           = time_ago_in_words(article.created_at) + ' ago'

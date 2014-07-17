@@ -1,21 +1,10 @@
 .comment
   .comment-wrapper
-    - vote_class = ''
-    - if logged_in? && user_vote = comment.user_vote(current_user)
-      - vote_class = user_vote.direction == 1 ? 'upvoted' : 'downvoted'
-    .votes class="#{vote_class}"
-      = link_to comment_upvote_path(comment_id: comment.id), remote: true, method: :post, class: 'up vote'
-        span class='oi' data-glyph='caret-top' title='caret-top' aria-hidden='true'
-      span.score= comment.score
-      = link_to comment_downvote_path(comment_id: comment.id), remote: true, method: :post, class: 'down vote'
-        span class='oi' data-glyph='caret-bottom' title='caret-bottom' aria-hidden='true'
+    = render partial: 'components/vote', locals: { votable: comment }
     .comment-content
       h2
         span class='oi' data-glyph='person' title='person' aria-hidden="true"
-        - if comment.user.present?
-          = comment.user.username
-        - else
-          | anonymous
+        = comment.user.try(:username) || 'anonymous'
       .body
         == comment.to_html
       .reply

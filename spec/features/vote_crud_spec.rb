@@ -14,16 +14,16 @@ RSpec.describe 'Voting: ' do
         visit '/'
       end
 
-      it 'should see the current count' do
+      it 'sees the current count' do
         expect(page).to have_content(5)
       end
 
-      it 'should be able to upvote' do
+      it 'is able to upvote' do
         page.find('.up.vote').click
         expect(page).to have_content(6)
       end
 
-      it 'should be able to downvote' do
+      it 'is able to downvote' do
         page.find('.down.vote').click
         expect(page).to have_content(4)
       end

@@ -1,19 +1,17 @@
 Rails.application.routes.draw do
   root to: 'articles#index'
-  resources :articles, only: [:new, :create, :show, :index] do
+
+  concern :commentable do
     resources :comments, only: [:create]
-    # resources :votes, only: [:create, :destroy, :update]
+  end
+
+  concern :votable do
     match 'upvote', to: 'votes#upvote', via: :post
     match 'downvote', to: 'votes#downvote', via: :post
   end
 
-  resources :comments, only: [] do
-    resources :comments, only: [:create]
-    # resources :votes, only: [:create, :destroy]
-    match 'upvote', to: 'votes#upvote', via: :post
-    match 'downvote', to: 'votes#downvote', via: :post
-  end
-
+  resources :articles, only: [:new, :create, :show, :index], concerns: [:commentable, :votable]
+  resources :comments, only: [], concerns: [:commentable, :votable]
   resources :users, only: [:new, :create, :show]
   resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update], path: 'reset', as: :reset
