@@ -37,4 +37,11 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
+
+  def render_404
+    render file: Rails.root.join('public/404.html'),
+      formats: [:html],
+      status:  404,
+      layout:  false
+  end
 end

@@ -21,7 +21,7 @@
   border-left: 1px solid $gray-main;
   border-right: 2px solid $gray-main;
   padding-top: 0.5em;
-  padding-left: 1.5em;
+  padding-left: 1.25em;
 
   .reply {
     padding-bottom: 0.5em;
@@ -42,6 +42,16 @@
   .body {
     padding-top: 0.25em;
   }
+
+  .comment-wrapper {
+    display: table;
+    width: 100%;
+  }
+
+  .comment-content {
+    display: table-cell;
+  }
+
 }
 
 #article-comments form,
@@ -58,6 +68,12 @@
 
 .hidden {
   display: none;
+}
+
+.comment .votes {
+  width: 1em;
+  padding-right: 0.5em;
+  vertical-align: top;
 }
 
 

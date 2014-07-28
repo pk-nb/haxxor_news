@@ -2,16 +2,14 @@
   .article
     .num= link_to index, article
     .article-detail
-      .votes
-        span class='oi' data-glyph='caret-top' title='caret-top' aria-hidden="true"
-        span.count= rand(100)
+      = render partial: 'components/vote', locals: { votable: article }
       .article-wrapper
         h2.title= link_to article.url do
           => article.title
           span= "(#{URI(article.url).host})"
         .user
           span class='oi' data-glyph='person' title='person' aria-hidden="true"
-          = article.user ? article.user.username : 'anonymous'
+          = article.user.try(:username) || 'anonymous'
         .post-time
           span class='oi' data-glyph='clock' title='clock' aria-hidden="true"
           = time_ago_in_words(article.created_at) + ' ago'
