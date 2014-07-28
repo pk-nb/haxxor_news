@@ -46,7 +46,7 @@ class VotesController < ApplicationController
     elsif params[:comment_id]
       Comment.find(params[:comment_id])
     else
-      render_404
+      :error
     end
   end
 end

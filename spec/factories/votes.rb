@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :vote do
     direction 1
-    sequence(:user_id) { create(:user).id }
+    user
     association :votable, factory: :article
   end
 end
