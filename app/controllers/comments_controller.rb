@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   before_action :require_logged_in, only: [:create]
   before_action :assign_parent, only: [:create]
 
+  # A comment
   def create
     @comment = current_user.comments.build(comment_params.merge(commentable: @parent))
     if @comment.save

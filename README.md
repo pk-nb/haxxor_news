@@ -1,5 +1,7 @@
 # HaxxorNews
 
+This is a cool thing.
+
 This is a ~~more stylish~~ clone of [Hacker News](https://news.ycombinator.com/) created as part of the [Rails
 developer internship](http://viget.com/about/careers/summer-2014-developer-intern)
 at [Viget](http://viget.com/).
